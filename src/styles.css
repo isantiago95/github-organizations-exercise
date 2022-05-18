@@ -1,0 +1,39 @@
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+  overflow-x: scroll;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scroll-bar {
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.home-card {
+  width: 500px;
+}
+.home-card,
+.home-list {
+  box-shadow: 10px 10px 30px -11px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 30px -11px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 30px -11px rgba(0, 0, 0, 0.75);
+}
+.home-card img {
+  width: 100%;
+}
+
+.centering {
+  text-align: -webkit-center;
+}
+
+/* media queries */
+@media screen and (max-width: 600px) {
+  .centering {
+    margin-top: 5em;
+  }
+  .home-card {
+    width: 100%;
+  }
+}

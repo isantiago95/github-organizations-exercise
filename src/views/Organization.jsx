@@ -28,7 +28,7 @@ const Organization = () => {
 
   return (
     <Row className='m-5'>
-      <Col md='4'>
+      <Col className='mt-3' md='4'>
         {org && (
           <React.Fragment>
             <img src={org.avatar_url} alt={org.login} style={{ width: '100%' }} />
@@ -45,9 +45,8 @@ const Organization = () => {
           </React.Fragment>
         )}
       </Col>
-      <Col>
+      <Col className='mt-3'>
         <h2>Organization Details</h2>
-
         {org && (
           <ListGroup>
             {Object.entries(org)
@@ -66,7 +65,7 @@ const Organization = () => {
                   name !== 'updated_at'
               )
               .map(item => (
-                <ListGroupItem>
+                <ListGroupItem className='hide-scroll-bar'>
                   <span className='fw-bold'>{parseName(item.name)}</span>:{' '}
                   {isURL(item.value) ? (
                     <a href={item.value} target='_blank' rel='noopener noreferrer'>

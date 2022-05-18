@@ -1,20 +1,16 @@
 import React from 'react';
-import { ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { ListGroupItem } from 'reactstrap';
 
-const SingleItem = ({ item, key }) => {
+const SingleItem = ({ item, selected, setSelected }) => {
   return (
-    <Link to={`/organization/${item.login}`}>
-      <ListGroupItem key={key} action tag='button'>
-        <ListGroupItemHeading>
-          <img style={{ width: '2em' }} src={item.avatar_url} alt={item.login} />
-        </ListGroupItemHeading>
-        <ListGroupItemText tag='div'>
-          <h5>{item.login}</h5>
-          {item.description}
-        </ListGroupItemText>
-      </ListGroupItem>
-    </Link>
+    <ListGroupItem
+      action
+      tag='button'
+      active={Boolean(selected && selected === item)}
+      onClick={() => setSelected(item)}>
+      <img style={{ width: '2.5em' }} src={item.avatar_url} alt={item.login} />{' '}
+      <strong>{item.login}</strong>
+    </ListGroupItem>
   );
 };
 
