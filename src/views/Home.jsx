@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { get } from '../utils/apiClient';
 import { sortByName } from '../utils/helpers';
 import SingleItem from '../components/SingleItem';
+import PaginationComponent from '../components/PaginationComponent';
 
 const Home = () => {
   const [orgs, setOrgs] = React.useState([]);
@@ -23,10 +24,6 @@ const Home = () => {
   React.useEffect(() => {
     retrieveOrgs();
   }, [current]);
-
-  React.useEffect(() => {
-    console.log(selected);
-  }, [selected]);
 
   async function retrieveOrgs() {
     const { data } = await get(`/organizations?per_page=${current}`);
@@ -46,13 +43,13 @@ const Home = () => {
                 <SingleItem item={org} key={org.id} selected={selected} setSelected={setSelected} />
               ))}
           </ListGroup>
+          <PaginationComponent />
         </Col>
         <Col className='centering'>
           <Card className='home-card'>
             <img
-              alt='Card image cap'
+              alt='user avatar'
               src={selected ? selected.avatar_url : 'https://picsum.photos/350'}
-              top
             />
             {selected && (
               <CardBody>
