@@ -11,26 +11,57 @@ import {
   CardText,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { useImmerReducer } from 'use-immer';
 import { get } from '../utils/apiClient';
 import { sortByName } from '../utils/helpers';
 import SingleItem from '../components/SingleItem';
 import PaginationComponent from '../components/PaginationComponent';
 
+const initialState = {
+  orgs: [],
+  page: 10,
+  selected: null,
+};
+
+function reducer(draft, action) {
+  switch (action.type) {
+    case 'retrieveOrgs': {
+      draft.orgs = action.payload;
+      return;
+    }
+    case 'selectOrg': {
+      draft.selected = action.payload;
+      return;
+    }
+    default:
+      return;
+  }
+}
+
 const Home = () => {
-  const [orgs, setOrgs] = React.useState([]);
-  const [current, setCurrent] = React.useState(10);
-  const [selected, setSelected] = React.useState(null);
+  const [{ orgs, page, selected }, dispatch] = useImmerReducer(reducer, initialState);
 
   React.useEffect(() => {
     retrieveOrgs();
-  }, [current]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
+  React.useEffect(() => {
+    console.log({ orgs, page, selected });
+  }, []);
 
   async function retrieveOrgs() {
-    const { data } = await get(`/organizations?per_page=${current}`);
-    setOrgs(sortByName(data));
+    const { data } = await get(`/organizations?per_page=${page}`);
+    dispatch({ type: 'retrieveOrgs', payload: sortByName(data) });
   }
 
-  const loadMoreData = () => setCurrent(current + 10);
+  const setSelected = item =>
+    dispatch({
+      type: 'selectOrg',
+      payload: item,
+    });
+
+  // const loadMoreData = () => setCurrent(current + 10);
 
   return (
     <Container className='my-5'>

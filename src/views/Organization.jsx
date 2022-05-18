@@ -1,6 +1,7 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import {
+  Button,
   Card,
   CardBody,
   CardText,
@@ -46,7 +47,14 @@ const Organization = () => {
         )}
       </Col>
       <Col className='mt-3'>
-        <h2>Organization Details</h2>
+        <div className='d-flex justify-content-between my-3'>
+          <h2>Organization Details</h2>
+          <Link to='/'>
+            <Button color='primary' outline>
+              Back
+            </Button>
+          </Link>
+        </div>
         {org && (
           <ListGroup>
             {Object.entries(org)
@@ -64,8 +72,8 @@ const Organization = () => {
                   name !== 'following' &&
                   name !== 'updated_at'
               )
-              .map(item => (
-                <ListGroupItem className='hide-scroll-bar'>
+              .map((item, key) => (
+                <ListGroupItem key={key} className='hide-scroll-bar'>
                   <span className='fw-bold'>{parseName(item.name)}</span>:{' '}
                   {isURL(item.value) ? (
                     <a href={item.value} target='_blank' rel='noopener noreferrer'>
