@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, ListGroup, Button } from 'reactstrap';
-import { Link, useRouteMatch, useParams } from 'react-router-dom';
 import { get } from '../utils/apiClient';
+import { sortByName } from '../utils/helpers';
 import SingleItem from '../components/SingleItem';
 
 const Home = () => {
@@ -14,8 +14,7 @@ const Home = () => {
 
   async function retrieveOrgs() {
     const { data } = await get(`/organizations?per_page=${current}`);
-    console.log(data);
-    setOrgs(data.sort((a, b) => (a.login > b.login ? 1 : -1)));
+    setOrgs(sortByName(data));
   }
 
   const loadMoreData = () => setCurrent(current + 10);
