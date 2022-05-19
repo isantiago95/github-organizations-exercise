@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
@@ -19,16 +20,16 @@ const Organization = () => {
   const [org, setOrg] = React.useState(null);
 
   React.useEffect(() => {
-    getOrganization(name);
+    getOrganization();
   }, []);
 
-  const getOrganization = async name => {
+  const getOrganization = async () => {
     const { data } = await get(`/orgs/${name}`);
     setOrg(data);
   };
 
   return (
-    <Row className='m-5'>
+    <Row className='p-5'>
       <Col className='mt-3' md='4'>
         {org && (
           <React.Fragment>

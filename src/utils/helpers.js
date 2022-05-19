@@ -1,7 +1,7 @@
 export const sortByName = array =>
   array.sort((a, b) => a.login.localeCompare(b.login, 'en', { sensitivity: 'base' }));
 
-export const parseDate = date =>
+export const parseDate = (date = Date()) =>
   new Date(date).toLocaleString('en-US', {
     weekday: 'long',
     year: 'numeric',

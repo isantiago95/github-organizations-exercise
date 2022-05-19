@@ -1,6 +1,7 @@
 {
   "name": "github-organizations-nearsure",
   "version": "0.1.0",
+  "homepage": "https://portfolio.israelsantiago.com/github-organizations",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
