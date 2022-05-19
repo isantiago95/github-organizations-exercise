@@ -1,35 +1,21 @@
 import React from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-const PaginationComponent = () => {
+const PaginationComponent = ({ page, pages, onChange }) => {
   return (
     <Pagination className='my-5'>
-      <PaginationItem disabled>
-        <PaginationLink first href='#' />
+      <PaginationItem disabled={page === 0}>
+        <PaginationLink onClick={() => onChange(page - 1)} previous />
       </PaginationItem>
-      <PaginationItem disabled>
-        <PaginationLink href='#' previous />
-      </PaginationItem>
-      <PaginationItem active>
-        <PaginationLink href='#'>1</PaginationLink>
-      </PaginationItem>
+
+      {[...Array(pages).keys()].map(item => (
+        <PaginationItem key={item} active={item === page}>
+          <PaginationLink onClick={() => onChange(item)}>{item + 1}</PaginationLink>
+        </PaginationItem>
+      ))}
+
       <PaginationItem>
-        <PaginationLink href='#'>2</PaginationLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink href='#'>3</PaginationLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink href='#'>4</PaginationLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink href='#'>5</PaginationLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink href='#' next />
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink href='#' last />
+        <PaginationLink disabled={page === pages - 1} onClick={() => onChange(page + 1)} next />
       </PaginationItem>
     </Pagination>
   );
